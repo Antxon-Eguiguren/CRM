@@ -1,6 +1,14 @@
 import { createClient } from '@supabase/supabase-js';
 
-export const supabase = createClient(
-  'https://zmhltkbsrkiqptitvsib.supabase.co',
-  'sb_publishable_adbItMeJ2KFRqJTvRF67Zg_nWx7N18j'
-);
+import type { Database } from '@/lib/types';
+
+const url = import.meta.env.VITE_SUPABASE_URL;
+const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+if (!url || !anonKey) {
+  throw new Error(
+    'Missing VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY. Copy .env.example to .env and set them.'
+  );
+}
+
+export const supabase = createClient<Database>(url, anonKey);
