@@ -251,27 +251,28 @@ export function ProjectFormDialog({
       open={open}
       onOpenChange={onOpenChange}>
       <DialogContent
-        className="sm:max-w-lg"
+        className="max-h-[min(730px,calc(100svh-2rem))] overflow-hidden sm:max-w-lg"
         showCloseButton>
-        <DialogHeader>
-          <DialogTitle>
-            {isView
-              ? 'Project details'
-              : isEdit
-              ? 'Edit project'
-              : 'New project'}
-          </DialogTitle>
-        </DialogHeader>
-        <form
-          id="project-form"
-          onSubmit={(e) => {
-            if (isView) {
-              e.preventDefault();
-              return;
-            }
-            void handleSubmit(onSubmit)(e);
-          }}>
-          <FieldGroup className="gap-4 py-1">
+        <div className="min-h-0 flex-1 overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>
+              {isView
+                ? 'Project details'
+                : isEdit
+                ? 'Edit project'
+                : 'New project'}
+            </DialogTitle>
+          </DialogHeader>
+          <form
+            id="project-form"
+            onSubmit={(e) => {
+              if (isView) {
+                e.preventDefault();
+                return;
+              }
+              void handleSubmit(onSubmit)(e);
+            }}>
+            <FieldGroup className="gap-4 py-1">
             <Field>
               <FieldLabel htmlFor="project-client">Client</FieldLabel>
               {clientsLoading ? (
@@ -483,8 +484,9 @@ export function ProjectFormDialog({
                 <FieldError>{errors.paid.message}</FieldError>
               ) : null}
             </Field>
-          </FieldGroup>
-        </form>
+            </FieldGroup>
+          </form>
+        </div>
         <DialogFooter>
           {isView ? (
             <Button

@@ -265,7 +265,7 @@ export default function ContactsPage() {
   return (
     <div className="space-y-4">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <h1 className="text-2xl font-semibold tracking-tight">Contacts</h1>
+        <h1 className="font-semibold tracking-tight">Contacts</h1>
         <div className="flex flex-wrap gap-2">
           <Button type="button" variant="outline" onClick={exportCsv} disabled={loading || filteredSorted.length === 0}>
             <DownloadIcon className="size-4" />

@@ -161,23 +161,24 @@ export function ClientFormDialog({
       open={open}
       onOpenChange={onOpenChange}>
       <DialogContent
-        className="sm:max-w-xl"
+        className="max-h-[min(730px,calc(100svh-2rem))] overflow-hidden sm:max-w-xl"
         showCloseButton>
-        <DialogHeader>
-          <DialogTitle>
-            {isView ? 'Client details' : isEdit ? 'Edit client' : 'New client'}
-          </DialogTitle>
-        </DialogHeader>
-        <form
-          id="client-form"
-          onSubmit={(e) => {
-            if (isView) {
-              e.preventDefault();
-              return;
-            }
-            void handleSubmit(onSubmit)(e);
-          }}>
-          <FieldGroup className="gap-4 py-1">
+        <div className="min-h-0 flex-1 overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>
+              {isView ? 'Client details' : isEdit ? 'Edit client' : 'New client'}
+            </DialogTitle>
+          </DialogHeader>
+          <form
+            id="client-form"
+            onSubmit={(e) => {
+              if (isView) {
+                e.preventDefault();
+                return;
+              }
+              void handleSubmit(onSubmit)(e);
+            }}>
+            <FieldGroup className="gap-4 py-1">
             <Field>
               <FieldLabel htmlFor="client-name">Name</FieldLabel>
               <Input
@@ -294,8 +295,9 @@ export function ClientFormDialog({
                 <FieldError>{errors.comments.message}</FieldError>
               ) : null}
             </Field>
-          </FieldGroup>
-        </form>
+            </FieldGroup>
+          </form>
+        </div>
         <DialogFooter>
           {isView ? (
             <Button
